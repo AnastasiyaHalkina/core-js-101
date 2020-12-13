@@ -227,7 +227,7 @@ function encodeToRot13(str) {
   const lowerAlphabet = 'abcdefghijklmnopqrstuvwxyz';
   const upperAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
-  for (const sym of str) {
+  str.split('').forEach((sym) => {
     if (lowerAlphabet.includes(sym)) {
       result += lowerAlphabet[(lowerAlphabet.indexOf(sym) + 13) % 26];
     } else if (upperAlphabet.includes(sym)) {
@@ -235,7 +235,7 @@ function encodeToRot13(str) {
     } else {
       result += sym;
     }
-  }
+  });
   return result;
 }
 /**

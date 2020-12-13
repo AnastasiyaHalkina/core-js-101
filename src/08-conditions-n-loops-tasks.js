@@ -320,9 +320,10 @@ function isCreditCardNumber(/* ccn */) {
 function getDigitalRoot(num) {
   const numStr = String(num);
   let result = 0;
-  for (const n of numStr) {
+  numStr.split('').forEach((n) => {
     result += +n;
-  }
+  });
+
   if (result > 9) return getDigitalRoot(result);
   return result;
 }
