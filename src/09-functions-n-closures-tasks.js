@@ -23,8 +23,10 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return function compos(value) {
+    return f(g(value));
+  };
 }
 
 
@@ -44,8 +46,11 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  function inner(arg) {
+    return arg ** exponent;
+  }
+  return inner;
 }
 
 
@@ -62,8 +67,16 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  function inner(x) {
+    let summ = 0;
+    args.forEach((el, ind) => {
+      summ += el * x ** (args.length - 1 - ind);
+      return summ;
+    });
+    return args.length > 0 ? summ : null;
+  }
+  return inner;
 }
 
 
@@ -81,8 +94,15 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const cacheDict = {};
+  function getCache() {
+    if (!cacheDict[func]) {
+      cacheDict[func] = func();
+    }
+    return cacheDict[func];
+  }
+  return getCache;
 }
 
 
